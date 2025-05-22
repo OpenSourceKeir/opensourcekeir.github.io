@@ -1,8 +1,10 @@
+//once site is loaded load the buttons and main image
 document.addEventListener('DOMContentLoaded', function() {
     const burger = document.querySelector('.burger');
     const navLinks = document.querySelector('.nav-links');
     const navItems = document.querySelectorAll('.nav-links li');
-    
+    const projectLinks = document.querySelectorAll('.project-link'); 
+
     burger.addEventListener('click', () => {
         navLinks.classList.toggle('active');
         
@@ -14,12 +16,24 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
             }
+        
+            const projectLinks = document.querySelectorAll('.project-link');
         });
+
+        projectLinks.forEach((link, index) => {
+            if (link.style.animation) {
+                link.style.animation = '';
+            } else {
+                link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+            }
+        });            
+
     });
 
 
 const profileImg3d = document.querySelector(".profile-img-3d");
 
+//all of the 3d card movement
 if (profileImg3d) {
     window.onmousemove = ({ clientX, clientY }) => {
         const rect = profileImg3d.getBoundingClientRect();
@@ -114,54 +128,22 @@ if (profileImg3d) {
     const statsSection = document.querySelector('.about-stats');
     const skillsSection = document.querySelector('.skills-container');
     const projectCards = document.querySelectorAll('.project-card');
-    
+
+
     if (statsSection) observer.observe(statsSection);
     if (skillsSection) observer.observe(skillsSection);
     
     projectCards.forEach((card, index) => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(20px)';
-        card.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
+        card.style.transition = `opacity 2s ease ${index * 0.1}s, transform 2s ease ${index * 0.1}s`;
         observer.observe(card);
     });
-    
-    const contactForm = document.querySelector('.contact-form');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const subject = formData.get('subject');
-            const message = formData.get('message');
-            
-            console.log('Form submitted:', { name, email, subject, message });
-            
-            alert('Thank you for your message! I will get back to you soon.');
-            this.reset();
-        });
-    }
     
     const header = document.querySelector('header');
     let lastScroll = 0;
     
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll <= 0) {
-            header.style.boxShadow = 'none';
-            return;
-        }
-        
-        if (currentScroll > lastScroll && currentScroll > 80) {
-            header.style.transform = 'translateY(-100%)';
-        } else {
-            header.style.transform = 'translateY(0)';
-            header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
-        }
-        
-        lastScroll = currentScroll;
-    });
+    
+
+
 });
