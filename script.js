@@ -35,13 +35,13 @@ const profileImg3d = document.querySelector(".profile-img-3d");
 
 //all of the 3d card movement
 if (profileImg3d) {
-    window.onmousemove = ({ clientX, clientY }) => {
-        const rect = profileImg3d.getBoundingClientRect();
-        const x = clientX - (rect.left + rect.width / 2);
-        const y = clientY - (rect.top + rect.height / 2);
+    window.onmousemove = ({ x, y }) => {
+        const photo = profileImg3d.getBoundingClientRect();
+        const horizontal = ((x) - (photo.left + photo.width / 2));
+        const vertical = ((y) - (photo.top + photo.height / 2));
         
-        profileImg3d.style.setProperty("--rotate-y", x / window.innerWidth * 45 + "deg");
-        profileImg3d.style.setProperty("--rotate-x", -y / window.innerHeight * 45 + "deg");
+        profileImg3d.style.setProperty("--rotate-y", horizontal / window.innerWidth * 45 + "deg");
+        profileImg3d.style.setProperty("--rotate-x", -vertical / window.innerHeight * 45 + "deg");
     };
 
     window.onmouseleave = () => {
@@ -139,11 +139,4 @@ if (profileImg3d) {
         card.style.transition = `opacity 2s ease ${index * 0.1}s, transform 2s ease ${index * 0.1}s`;
         observer.observe(card);
     });
-    
-    const header = document.querySelector('header');
-    let lastScroll = 0;
-    
-    
-
-
 });
